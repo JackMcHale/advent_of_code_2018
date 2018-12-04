@@ -1,15 +1,10 @@
-
+var utils = require('./fileutils.js');
 function main() {
     //Get values from file
-    var fs = require('fs');
-
-    let datafile = fs.readFileSync('data/dayone.txt', 'utf8');
-    //Parse values into array of strings
-    let valueArray = datafile.split("\n");
-    //Pass values into adder
+    let valueArray = utils.getArrayFromFile('dayone.txt');
     let result = findFirst(valueArray);
     //Print result
-    process.stdout.write("Final" + result + "");
+    process.stdout.write("Final answer is " + result + "\n");
 }
 
 function findFirst(inputValues) {
@@ -31,7 +26,6 @@ function findFirst(inputValues) {
             else if (firstChar == "-") {
                 result -= value;
             }
-            process.stdout.write(result + "\n")
             if (resultArray.includes(result)) {
                 foundDuplicate = true;
                 break;
