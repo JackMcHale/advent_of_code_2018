@@ -43,7 +43,7 @@ function main() {
     //Pass values into adder
     let result = findDuo(valueArray);
     //Print result
-    process.stdout.write(result + "");
+    process.stdout.write(result + "\n");
 }
 
 main();
