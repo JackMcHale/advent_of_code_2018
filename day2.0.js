@@ -5,7 +5,7 @@ function calculateCheckSum(inputArray) {
     var doubles = 0;
     var triples = 0;
     //loop through 
-    inputArray.map(input => {
+    inputArray.forEach(input => {
         //Count the characters
         const characterCounts = countCharacters(input);
         //Add the doubles
