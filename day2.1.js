@@ -4,11 +4,9 @@ function findDuo(inputArray) {
     var correctID = '';
     //loop through 
     inputArray.forEach((item, index, theArray) => {
-        for(var i = index; i<theArray.length; i++)
-        {
-            var match = isMatchy(item,theArray[i]);
-            if(match != '')
-            {
+        for (var i = index; i < theArray.length; i++) {
+            var match = isMatchy(item, theArray[i]);
+            if (match != '') {
                 correctID = match;
             }
         }
@@ -16,28 +14,23 @@ function findDuo(inputArray) {
     return correctID;
 }
 
-function isMatchy(firstString,secondString)
-{
+function isMatchy(firstString, secondString) {
     var out = '';
     var mismatchCount = 0;
     var differentCharPosition = 0;
-    for(var i=0;i<firstString.length;i++)
-    {
+    for (var i = 0; i < firstString.length; i++) {
         var firstChar = firstString.charAt(i);
         var secondChar = secondString.charAt(i);
-        if(firstChar != secondChar)
-        {
-            mismatchCount ++;
-            differentCharPosition=i;
+        if (firstChar != secondChar) {
+            mismatchCount++;
+            differentCharPosition = i;
         }
-        if(mismatchCount > 1)
-        {
+        if (mismatchCount > 1) {
             return '';
         }
     }
-    if(mismatchCount == 1)
-    {
-        out = firstString.substring(0,differentCharPosition) + firstString.substring(differentCharPosition+1);
+    if (mismatchCount == 1) {
+        out = firstString.substring(0, differentCharPosition) + firstString.substring(differentCharPosition + 1);
     }
     return out;
 }

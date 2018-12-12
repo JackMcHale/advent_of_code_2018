@@ -23,13 +23,11 @@ function calculateCheckSum(inputArray) {
 
 function countCharacters(input) {
     var characters = {};
-    for (var c of input)
-    {
-        if(characters.hasOwnProperty(c))
-        {
+    for (var c of input) {
+        if (characters.hasOwnProperty(c)) {
             characters[c]++;
         }
-        else{
+        else {
             characters[c] = 1;
         }
     };
