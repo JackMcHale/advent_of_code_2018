@@ -1,46 +1,46 @@
 var utils = require('./fileutils.js');
 
-function calculateCheckSum(inputArray) {
-    var total = 0;
-    var doubles = 0;
-    var triples = 0;
+function findDuo(inputArray) {
+    var correctID = '';
     //loop through 
-    inputArray.map(input => {
-        //Count the characters
-        const characterCounts = countCharacters(input);
-        //Add the doubles
-        if (hasAmount(characterCounts, 2)) {
-            doubles++
-        }
-        //Add the triples
-        if (hasAmount(characterCounts, 3)) {
-            triples++
+    inputArray.forEach((item, index, theArray) => {
+        for(var i = index; i<theArray.length; i++)
+        {
+            var match = isMatchy(item,theArray[i]);
+            if(match != '')
+            {
+                correctID = match;
+            }
         }
     });
-    total = doubles * triples;
-    return total;
+    return correctID;
 }
 
-function countCharacters(input) {
-    var characters = {};
-    for (var c of input)
+function isMatchy(firstString,secondString)
+{
+    var out = '';
+    var mismatchCount = 0;
+    var differentCharPosition = 0;
+    for(var i=0;i<firstString.length;i++)
     {
-        if(characters.hasOwnProperty(c))
+        var firstChar = firstString.charAt(i);
+        var secondChar = secondString.charAt(i);
+        if(firstChar != secondChar)
         {
-            characters[c]++;
+            mismatchCount ++;
+            differentCharPosition=i;
         }
-        else{
-            characters[c] = 1;
+        if(mismatchCount > 1)
+        {
+            return '';
         }
-    };
-    return characters;
+    }
+    if(mismatchCount == 1)
+    {
+        out = firstString.substring(0,differentCharPosition) + firstString.substring(differentCharPosition+1);
+    }
+    return out;
 }
-
-function hasAmount(characterCounts, amount) {
-    const valueArray = Object.values(characterCounts);
-    return valueArray.includes(amount);
-}
-
 
 
 
@@ -48,7 +48,7 @@ function main() {
     //Get values from file
     let valueArray = utils.getArrayFromFile('daytwo.txt');
     //Pass values into adder
-    let result = calculateCheckSum(valueArray);
+    let result = findDuo(valueArray);
     //Print result
     process.stdout.write(result + "");
 }
