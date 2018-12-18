@@ -1,88 +1,67 @@
 var utils = require('./fileutils.js');
 function main() {
     //Get values from file
-    let valueArray = utils.getArrayFromFile('daythree.txt');
+    let valueArray = utils.getArrayFromFile('daythfour.txt');
     //Pass values into adder
-    let result = countContestedSquares(valueArray);
+    let result = getGuardAndTime(valueArray);
     //Print result
-    process.stdout.write(result + '\n');
+    process.stdout.write(result[0] * result[1] + '\n');
 }
 
-function countContestedSquares(inputValues) {
-    var cleanSwatch = 0;
-    var allSquares = initializeSquare(1000);
-    var swatches = [];
-    process.stdout.write('Finishing inialization\n');
-    inputValues.forEach((record ,index) =>
-        {
-            var swatch = parseRecord(record);
-            swatches[index] = swatch;
-            for(var row=swatch.startRow; row< (swatch.startRow + swatch.height); row++)
-            {
-                for(var col = swatch.startColumn;col<(swatch.startColumn + swatch.width); col++)
-                {
-                    var squareValue = allSquares[row][col];
-                    allSquares[row][col]++;
-                }
-            }
-        });
-    swatches.forEach(swatch =>
-            {
-                var swatchValue = 0;
-                for(var row=swatch.startRow; row< (swatch.startRow + swatch.height); row++)
-                {
-                    for(var col = swatch.startColumn;col<(swatch.startColumn + swatch.width); col++)
-                    {
-                        
-                        swatchValue = allSquares[row][col] + swatchValue;
-                    }
-                }
-                if(swatchValue == 0)
-                {
-                    cleanSwatch = swatch.recNo;
-                }
-            });
-    return cleanSwatch;
+function getGuardAndTime(inputValues) {
+    var result = [];
+    var guardResults = {};
+
+    //For each row
+    return result;
 }
 
-function initializeSquare(inputSize) {
-    var rows = [];
-    for (var rowIndex = 0; rowIndex < inputSize; rowIndex++) {
-        rows[rowIndex] = [];
-        for (var columnIndex = 0; columnIndex < inputSize; columnIndex++) {
-            rows[rowIndex][columnIndex] = -1;
-        }
+
+//[1518-01-12 23:57] Guard #3209 begins shift
+function parseRecord(record) {
+
+}
+
+function startShift(gs)
+{
+
+}
+
+function endShift(gs)
+{
+
+}
+
+function startSleep(gs)
+{
+
+}
+
+function endSleep(gs)
+{
+
+}
+
+function GuardEvent(guardId,minute,type)
+{
+    this.id = guardId;
+    this.minute = minute;
+    this.type = type;
+}
+
+var EventType = {
+    START_SHIFT:0,
+    START_SLEEP:1,
+    END_SLEEP:2
+}
+
+function GuardStats(guardId) {
+    this.id = guardId;
+    //Initialize time array on startup
+    this.minutes = [];
+    for (var i = 0; i < 60; i++) {
+        this.minutes[i] = 0;
     }
-    return rows;
-}
-
-//#1 @ 808,550: 12x22
-//## @ c,r: wxh)
-function parseRecord(record)
-{
-    
-    //Find the @
-    const atLocation = record.indexOf("@");
-    var recordNumber = record.substr(1,atLocation-1);
-    //Find the colon
-    const colonLocation = record.indexOf(":")
-    const location = record.substr(atLocation+2,colonLocation-1);
-    //Split at the comma
-    const position = location.split(",");
-    //one space after the colon
-    const dimensions = record.substr(colonLocation+2);
-    const size = dimensions.split("x");
-    //Split at the x
-    return new SwatchClaim(parseInt(recordNumber),parseInt(position[1]),parseInt(position[0]),parseInt(size[1]),parseInt(size[0]));
-}
-
-function SwatchClaim(recNo,startRow,startColumn,height,width)
-{
-    this.recNo = recNo;
-    this.startRow = startRow;
-    this.startColumn = startColumn;
-    this.height = height;
-    this.width = width;
 }
 
 main();
